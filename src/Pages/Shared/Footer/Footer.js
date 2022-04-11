@@ -1,9 +1,10 @@
 import React from 'react';
+import './Footer.css'
 
 const Footer = () => {
     return (
         <footer>
-            <p>
+            <p className='footer'>
                 <small>Copywrite &copy;</small>{new Date().getFullYear()} Noman
             </p>
         </footer>

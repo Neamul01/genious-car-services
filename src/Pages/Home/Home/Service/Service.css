@@ -1,0 +1,26 @@
+.service {
+    padding: 0 0.5rem 1rem 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 1.5rem gray;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.service img {
+    border-radius: 0.1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.service button {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.service button:hover {
+    background: lightgray;
+}
