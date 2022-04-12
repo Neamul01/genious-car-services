@@ -17,7 +17,7 @@ const Header = () => {
         signOut(auth)
     }
 
-    console.log(user)
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -28,7 +28,7 @@ const Header = () => {
                     <Nav.Link as={Link} to='/'>Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>
                     <Nav.Link as={Link} to='/about'>About</Nav.Link>
-                    <p className='text-white'>{user?.displayName}</p>
+                    <p className='text-white'>{user?.email}</p>
                     {user
                         ?
                         <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>

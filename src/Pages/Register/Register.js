@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.css'
 import GoogleIcon from '@mui/icons-material/Google';
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import auth from '../../firebase.init';
 
 
 
@@ -13,11 +15,21 @@ const Register = () => {
     const [pass, setPass] = useState('');
     const [error, setError] = useState('');
 
+    const navigate = useNavigate();
+
     const handleGoogleSignIn = useGoogleSignIn();
 
 
-    const handleRegisterForm = () => {
-        console.log(name, ' ', email, ' ', pass)
+    const handleRegisterForm = (event) => {
+        event.preventDefault()
+        createUserWithEmailAndPassword(auth, email, pass)
+            .then(result => {
+                console.log(result.user)
+                navigate('/')
+            })
+            .catch(error => {
+                setError(error)
+            })
 
     }
 
@@ -25,6 +37,8 @@ const Register = () => {
         const e = handleGoogleSignIn();
         setError(e)
     }
+
+
 
     return (
         <div>
