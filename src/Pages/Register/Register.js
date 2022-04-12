@@ -1,14 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import auth from '../../../src/firebase.init'
+import { Link } from 'react-router-dom';
 import './Register.css'
-import { faBone } from '@fortawesome/free-solid-svg-icons';
+import GoogleIcon from '@mui/icons-material/Google';
+import useGoogleSignIn from '../../hooks/useGoogleSignIn';
 
 
-const googleProvider = new GoogleAuthProvider()
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -16,27 +13,18 @@ const Register = () => {
     const [pass, setPass] = useState('');
     const [error, setError] = useState('');
 
-    const navigate = useNavigate()
+    const handleGoogleSignIn = useGoogleSignIn();
+
 
     const handleRegisterForm = () => {
         console.log(name, ' ', email, ' ', pass)
 
     }
 
-    const handleGoogleSignIn = () => {
-
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                console.log(result.user)
-                navigate('/')
-            })
-            .catch(error => {
-                setError(error.message)
-            })
-
+    const handleGoogleSignInIn = () => {
+        const e = handleGoogleSignIn();
+        setError(e)
     }
-
-
 
     return (
         <div>
@@ -62,6 +50,7 @@ const Register = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control onBlur={e => setPass(e.target.value)} type="password" placeholder="Password" required />
                     </Form.Group>
+                    <p className='text-danger'>{error}</p>
                     <Form.Group className="mb-3" >
                         <p>Already Have an Account? <Link to={'/login'}>Login</Link></p>
                     </Form.Group>
@@ -69,8 +58,8 @@ const Register = () => {
                         Submit
                     </Button>
                 </Form>
-                <Button className='w-100 mt-4 border-none google-btn' variant='white' type="submit" onClick={handleGoogleSignIn}>
-                    <FontAwesomeIcon icon={faBone} /> Login With Google
+                <Button className='w-100 mt-4 border-none google-btn' variant='white' type="submit" onClick={handleGoogleSignInIn}>
+                    <GoogleIcon className='text-primary me-1' /> Login With Google
                 </Button>
             </div>
         </div>

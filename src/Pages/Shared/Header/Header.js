@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../../images/logo.png'
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import auth from '../../../firebase.init';
 
 const Header = () => {
+    const [user, setUser] = useState({})
+
+    onAuthStateChanged(auth, user => {
+        setUser(user)
+    })
+
+    const handleSignOut = () => {
+        signOut(auth)
+    }
+
+    console.log(user)
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -15,8 +28,13 @@ const Header = () => {
                     <Nav.Link as={Link} to='/'>Home</Nav.Link>
                     <Nav.Link href="#features">Features</Nav.Link>
                     <Nav.Link as={Link} to='/about'>About</Nav.Link>
-                    <Nav.Link as={Link} to='/login'>Login</Nav.Link>
-                    <Nav.Link as={Link} to='/register'>Register</Nav.Link>
+                    <p className='text-white'>{user?.displayName}</p>
+                    {user
+                        ?
+                        <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>
+                        :
+                        <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                    }
                 </Nav>
             </Container>
         </Navbar>
