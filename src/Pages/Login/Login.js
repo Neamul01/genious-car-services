@@ -6,11 +6,14 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase.init';
+import useFacebookSignIn from '../../hooks/useFacebookSignIn';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const handleGoogleSignIn = useGoogleSignIn()
+
+    const { handleFacebookSignIn, fbError } = useFacebookSignIn();
 
     const navigate = useNavigate();
 
@@ -24,6 +27,10 @@ const Login = () => {
 
     const handleGoogleSignInIn = () => {
         handleGoogleSignIn()
+    }
+    const handleFbSignIn = () => {
+        console.log(fbError)
+        handleFacebookSignIn()
     }
 
     return (
@@ -52,7 +59,7 @@ const Login = () => {
                 <div className='d-flex justify-content-center h-auto w-100 mt-4 border-none' variant='white' type="submit" >
                     <div>
                         <span className=' google-btn me-2' onClick={handleGoogleSignInIn}><GoogleIcon className='text-primary me-1' /> Google</span>
-                        <span className=' google-btn'><FacebookIcon className='text-primary me-1' />Facebook</span>
+                        <span className=' google-btn' onClick={handleFbSignIn}><FacebookIcon className='text-primary me-1' />Facebook</span>
                     </div>
                 </div>
             </div>
