@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel'
 
-import slider1 from '../../../../images/banner/banner1.jpg';
-import slider2 from '../../../../images/banner/banner2.jpg';
-import slider3 from '../../../../images/banner/banner3.jpg';
 
 const Carousels = () => {
     const [sliders, setSliders] = useState([]);
