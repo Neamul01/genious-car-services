@@ -13,7 +13,6 @@ const Carousels = () => {
     const sliderImg = [];
     sliders.map(slider => sliderImg.push(slider.img))
 
-    console.log(sliderImg)
 
 
     return (
