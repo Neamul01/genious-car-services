@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import auth from '../../firebase.init';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const handleGoogleSignIn = useGoogleSignIn()
 
-    const handleLoginForm = () => {
-        console.log(email, pass)
+    const navigate = useNavigate();
+
+    const handleLoginForm = event => {
+        event.preventDefault();
+        signInWithEmailAndPassword(auth, email, pass)
+            .then(result => {
+                navigate('/')
+            })
     }
 
     const handleGoogleSignInIn = () => {
@@ -40,9 +49,12 @@ const Login = () => {
                         Submit
                     </Button>
                 </Form>
-                <Button className='w-100 mt-4 border-none google-btn' variant='white' type="submit" onClick={handleGoogleSignInIn}>
-                    <GoogleIcon className='text-primary me-1' /> Login With Google
-                </Button>
+                <div className='d-flex justify-content-center h-auto w-100 mt-4 border-none' variant='white' type="submit" >
+                    <div>
+                        <span className=' google-btn me-2' onClick={handleGoogleSignInIn}><GoogleIcon className='text-primary me-1' /> Google</span>
+                        <span className=' google-btn'><FacebookIcon className='text-primary me-1' />Facebook</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

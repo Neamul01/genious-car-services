@@ -1,5 +1,9 @@
 .google-btn {
+    align-items: center;
     background: lightgray;
+    padding: 1rem 0.7rem;
+    margin: auto;
+    border-radius: 0.3rem;
 }
 
 .google-btn:hover {
