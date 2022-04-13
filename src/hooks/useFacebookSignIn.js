@@ -18,7 +18,6 @@ const useFacebookSignIn = () => {
             })
             .catch(fbEerror => {
                 setError(fbEerror)
-                console.log(fbError)
             })
     }
     return {

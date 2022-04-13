@@ -32,6 +32,8 @@ const Register = () => {
                     .then(() => {
                         console.log('email varification send')
                     })
+
+
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {

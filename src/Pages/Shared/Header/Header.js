@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../../../images/logo.png'
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
+import CustomLink from '../../CustomLink/CustomLink';
+import useUser from '../../../hooks/useUser';
+
 
 const Header = () => {
-    const [user, setUser] = useState({})
+    const authUser = useUser();
 
-    onAuthStateChanged(auth, user => {
-        setUser(user)
-    })
+
 
     const handleSignOut = () => {
         signOut(auth)
@@ -25,15 +25,15 @@ const Header = () => {
                     width: '12rem'
                 }} src={logo} alt="" /></Navbar.Brand>
                 <Nav className="ms-auto">
-                    <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link as={Link} to='/about'>About</Nav.Link>
-                    <p className='text-white pt-1'>{user?.email}</p>
-                    {user
+                    <Nav.Link><CustomLink to='/'>Home</CustomLink></Nav.Link>
+                    <Nav.Link><CustomLink to='/features'>Features</CustomLink></Nav.Link>
+                    <Nav.Link><CustomLink to='/about'>About</CustomLink></Nav.Link>
+                    <p className='text-white pt-1'>{authUser?.displayName}</p>
+                    {authUser
                         ?
                         <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>
                         :
-                        <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                        <Nav.Link><CustomLink to='/login'>Login</CustomLink></Nav.Link>
                     }
                 </Nav>
             </Container>
