@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
@@ -13,15 +13,19 @@ const Login = () => {
     const [pass, setPass] = useState('');
     const handleGoogleSignIn = useGoogleSignIn()
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
     const { handleFacebookSignIn, fbError } = useFacebookSignIn();
 
-    const navigate = useNavigate();
 
     const handleLoginForm = event => {
         event.preventDefault();
         signInWithEmailAndPassword(auth, email, pass)
             .then(result => {
-                navigate('/')
+                navigate(from, { replace: true });
             })
     }
 
