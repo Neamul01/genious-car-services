@@ -28,7 +28,7 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto navbar-link">
                         <CustomLink to='/'>Home</CustomLink>
-                        <Nav.Link style={{ color: 'lightgray' }} href='#services'>Services</Nav.Link>
+                        <Nav.Link style={{ color: 'lightgray' }} href='/home#services'>Services</Nav.Link>
                         <CustomLink to='/features'>Features</CustomLink>
                         <CustomLink to='/about'>About</CustomLink>
                         <p className='text-white pt-1'>{authUser?.displayName}</p>
