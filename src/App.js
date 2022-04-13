@@ -10,6 +10,7 @@ import RequireAuth from './Pages/Shared/RequireAuth/RequireAuth'
 import Register from './Pages/Register/Register';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import Features from './Pages/Features/Features';
+import ServiceDetails from './Pages/Home/Home/ServiceDetails/ServiceDetails';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>} ></Route>
+        <Route path='/service/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
 
         <Route path='/about' element={
           <RequireAuth>
