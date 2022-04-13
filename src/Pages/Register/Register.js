@@ -5,7 +5,7 @@ import './Register.css'
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import useGoogleSignIn from '../../hooks/useGoogleSignIn';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import auth from '../../firebase.init';
 import useFacebookSignIn from '../../hooks/useFacebookSignIn';
 
@@ -27,12 +27,25 @@ const Register = () => {
         event.preventDefault()
         createUserWithEmailAndPassword(auth, email, pass)
             .then(result => {
-                console.log(result.user)
+
+                sendEmailVerification(auth.currentUser)
+                    .then(() => {
+                        console.log('email varification send')
+                    })
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                }).then(() => {
+                    console.log('info updated')
+                }).catch(error => {
+                    setError(error)
+                })
+
                 navigate('/')
             })
             .catch(error => {
                 setError(error)
             })
+
 
     }
 

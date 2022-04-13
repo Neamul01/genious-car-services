@@ -28,6 +28,7 @@ const Login = () => {
     const handleGoogleSignInIn = () => {
         handleGoogleSignIn()
     }
+
     const handleFbSignIn = () => {
         console.log(fbError)
         handleFacebookSignIn()
