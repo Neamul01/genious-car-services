@@ -26,16 +26,17 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ms-auto">
-                        <Nav.Link as="li"><CustomLink to='/features'>Features</CustomLink></Nav.Link>
-                        <Nav.Link as="li"><CustomLink to='/'>Home</CustomLink></Nav.Link>
-                        <Nav.Link as="li"><CustomLink to='/about'>About</CustomLink></Nav.Link>
+                    <Nav className="ms-auto navbar-link">
+                        <CustomLink to='/'>Home</CustomLink>
+                        <Nav.Link style={{ color: 'lightgray' }} href='#services'>Services</Nav.Link>
+                        <CustomLink to='/features'>Features</CustomLink>
+                        <CustomLink to='/about'>About</CustomLink>
                         <p className='text-white pt-1'>{authUser?.displayName}</p>
                         {authUser
                             ?
-                            <Nav.Link as="li"><span onClick={handleSignOut}>Log Out</span></Nav.Link>
+                            <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>
                             :
-                            <Nav.Link as="li"><CustomLink to='/login'>Login</CustomLink></Nav.Link>
+                            <CustomLink to='/login'>Login</CustomLink>
                         }
                     </Nav>
                 </Navbar.Collapse>
