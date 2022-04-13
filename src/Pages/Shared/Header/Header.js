@@ -6,8 +6,6 @@ import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
 import CustomLink from '../../CustomLink/CustomLink';
 import useUser from '../../../hooks/useUser';
-import RequireAuth from '../RequireAuth/RequireAuth';
-
 
 const Header = () => {
     const authUser = useUser();
@@ -24,16 +22,12 @@ const Header = () => {
             <Container>
                 <Navbar.Brand as={Link} to='/'><img style={{
                     width: '12rem'
-                }} src={logo} alt="" /></Navbar.Brand>
+                }} src={logo} alt="" />
+                </Navbar.Brand>
                 <Nav className="ms-auto">
-                    <Nav.Link><CustomLink to='/'>Home</CustomLink></Nav.Link>
-
                     <Nav.Link><CustomLink to='/features'>Features</CustomLink></Nav.Link>
-
-                    <RequireAuth>
-                        <Nav.Link><CustomLink to='/about'>About</CustomLink></Nav.Link>
-                    </RequireAuth>
-
+                    <Nav.Link><CustomLink to='/'>Home</CustomLink></Nav.Link>
+                    <Nav.Link><CustomLink to='/about'>About</CustomLink></Nav.Link>
                     <p className='text-white pt-1'>{authUser?.displayName}</p>
                     {authUser
                         ?

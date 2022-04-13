@@ -18,7 +18,7 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/';
 
-    const { handleFacebookSignIn, fbError } = useFacebookSignIn();
+    const { handleFacebookSignIn } = useFacebookSignIn();
 
 
     const handleLoginForm = event => {
@@ -30,11 +30,10 @@ const Login = () => {
     }
 
     const handleGoogleSignInIn = () => {
-        handleGoogleSignIn()
+        handleGoogleSignIn();
     }
 
     const handleFbSignIn = () => {
-        console.log(fbError)
         handleFacebookSignIn()
     }
 

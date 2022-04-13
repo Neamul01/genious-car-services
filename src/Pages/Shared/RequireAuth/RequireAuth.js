@@ -1,13 +1,28 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import useUser from '../../../hooks/useUser';
+// import { useState } from 'react'
+// import { onAuthStateChanged } from 'firebase/auth';
+// import auth from '../../../firebase.init';
+
 
 const RequireAuth = ({ children }) => {
-    const user = useUser();
+    const { authUser, loading } = useUser();
     const location = useLocation();
 
-    if (!user) {
-        <Navigate to={'/login'} state={{ from: location }} replace />
+    // const [authUser, setauthUser] = useState({});
+    console.log(authUser.email)
+
+    // onAuthStateChanged(auth, user => {
+    //     setauthUser(user)
+    // })
+    if (loading) {
+        console.log('loading...')
+        return <p>Loading...</p>
+    }
+
+    if (!authUser.accessToken) {
+        return <Navigate to={'/login'} state={{ from: location }} replace />
     }
     return children;
 };
