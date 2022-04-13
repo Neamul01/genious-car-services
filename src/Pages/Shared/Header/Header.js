@@ -8,7 +8,7 @@ import CustomLink from '../../CustomLink/CustomLink';
 import useUser from '../../../hooks/useUser';
 
 const Header = () => {
-    const authUser = useUser();
+    const { authUser } = useUser();
 
 
 
@@ -25,15 +25,15 @@ const Header = () => {
                 }} src={logo} alt="" />
                 </Navbar.Brand>
                 <Nav className="ms-auto">
-                    <Nav.Link><CustomLink to='/features'>Features</CustomLink></Nav.Link>
-                    <Nav.Link><CustomLink to='/'>Home</CustomLink></Nav.Link>
-                    <Nav.Link><CustomLink to='/about'>About</CustomLink></Nav.Link>
+                    <Nav.Link as="li"><CustomLink to='/features'>Features</CustomLink></Nav.Link>
+                    <Nav.Link as="li"><CustomLink to='/'>Home</CustomLink></Nav.Link>
+                    <Nav.Link as="li"><CustomLink to='/about'>About</CustomLink></Nav.Link>
                     <p className='text-white pt-1'>{authUser?.displayName}</p>
                     {authUser
                         ?
-                        <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>
+                        <Nav.Link as="li"><span onClick={handleSignOut}>Log Out</span></Nav.Link>
                         :
-                        <Nav.Link><CustomLink to='/login'>Login</CustomLink></Nav.Link>
+                        <Nav.Link as="li"><CustomLink to='/login'>Login</CustomLink></Nav.Link>
                     }
                 </Nav>
             </Container>
