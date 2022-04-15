@@ -17,6 +17,8 @@ const Register = () => {
     const [pass, setPass] = useState('');
     const [error, setError] = useState('');
 
+    const [check, setCheck] = useState(false);
+
     const navigate = useNavigate();
 
     const handleGoogleSignIn = useGoogleSignIn();
@@ -33,7 +35,6 @@ const Register = () => {
                         console.log('email varification send')
                     })
 
-
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
@@ -47,8 +48,6 @@ const Register = () => {
             .catch(error => {
                 setError(error)
             })
-
-
     }
 
     const handleGoogleSignInIn = () => {
@@ -76,9 +75,6 @@ const Register = () => {
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control onBlur={e => setEmail(e.target.value)} type="email" placeholder="Enter email" required />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -87,9 +83,12 @@ const Register = () => {
                     </Form.Group>
                     <p className='text-danger'>{error}</p>
                     <Form.Group className="mb-3" >
+                        <Form.Check onClick={() => setCheck(!check)} className={check ? 'text-primary' : 'text-danger'} type="checkbox" label="Terms and condition" name='checkbox' />
+                    </Form.Group>
+                    <Form.Group className="mb-3" >
                         <p>Already Have an Account? <Link to={'/login'}>Login</Link></p>
                     </Form.Group>
-                    <Button className='w-100' variant="primary" type="submit">
+                    <Button className='w-100' variant="primary" disabled={!check} type="submit">
                         Submit
                     </Button>
                 </Form>

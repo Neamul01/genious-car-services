@@ -32,7 +32,7 @@ const Header = () => {
                         <CustomLink to='/features'>Features</CustomLink>
                         <CustomLink to='/about'>About</CustomLink>
                         <p className='text-white pt-1'>{authUser?.displayName}</p>
-                        {authUser
+                        {authUser?.email
                             ?
                             <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>
                             :
