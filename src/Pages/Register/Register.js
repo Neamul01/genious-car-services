@@ -25,29 +25,29 @@ const Register = () => {
     const { handleFacebookSignIn, fbError } = useFacebookSignIn();
 
 
-    const handleRegisterForm = (event) => {
+    const handleRegisterForm = async (event) => {
         event.preventDefault()
-        createUserWithEmailAndPassword(auth, email, pass)
+        await createUserWithEmailAndPassword(auth, email, pass)
             .then(result => {
-
-                sendEmailVerification(auth.currentUser)
-                    .then(() => {
-                        console.log('email varification send')
-                    })
-
-                updateProfile(auth.currentUser, {
-                    displayName: name
-                }).then(() => {
-                    console.log('info updated')
-                }).catch(error => {
-                    setError(error)
-                })
-
-                navigate('/')
+                console.log('user created')
             })
             .catch(error => {
                 setError(error)
             })
+
+        await sendEmailVerification(auth.currentUser)
+            .then(() => {
+                console.log('email varification send')
+            })
+
+        await updateProfile(auth.currentUser, {
+            displayName: name
+        }).then(() => {
+            console.log('info updated')
+        }).catch(error => {
+            setError(error)
+        })
+        navigate('/')
     }
 
     const handleGoogleSignInIn = () => {
