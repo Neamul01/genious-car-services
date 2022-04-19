@@ -8,6 +8,7 @@ import useGoogleSignIn from '../../hooks/useGoogleSignIn';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import auth from '../../firebase.init';
 import useFacebookSignIn from '../../hooks/useFacebookSignIn';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 
 
@@ -99,6 +100,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <PageTitle title='Register'></PageTitle>
         </div>
     );
 };

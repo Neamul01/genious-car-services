@@ -7,6 +7,7 @@ import useGoogleSignIn from '../../hooks/useGoogleSignIn';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase.init';
 import useFacebookSignIn from '../../hooks/useFacebookSignIn';
+import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -67,6 +68,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <PageTitle title='Login'></PageTitle>
         </div>
     );
 };
