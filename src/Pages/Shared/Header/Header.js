@@ -15,7 +15,7 @@ const Header = () => {
     const handleSignOut = () => {
         signOut(auth)
     }
-    console.log(authUser)
+    // console.log(authUser)
 
     return (
         <Navbar bg="dark" sticky='top' collapseOnSelect expand="lg" variant="dark">
