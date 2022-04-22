@@ -31,12 +31,20 @@ const Header = () => {
                         <Nav.Link style={{ color: 'lightgray' }} href='/home#services'>Services</Nav.Link>
                         <CustomLink to='/features'>Features</CustomLink>
                         <CustomLink to='/about'>About</CustomLink>
+
+                        {
+                            authUser?.email && <>
+                                <CustomLink to='service'>Manage</CustomLink>
+                                <CustomLink to='addservice'>Add</CustomLink>
+                            </>
+                        }
+
                         <p className='text-white pt-1'>{authUser?.displayName}</p>
-                        {authUser?.email
-                            ?
-                            <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link>
-                            :
-                            <CustomLink to='/login'>Login</CustomLink>
+
+                        {
+                            authUser?.email ?
+                                <Nav.Link><span onClick={handleSignOut}>Log Out</span></Nav.Link> :
+                                <CustomLink to='/login'>Login</CustomLink>
                         }
                     </Nav>
                 </Navbar.Collapse>

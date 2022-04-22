@@ -11,6 +11,8 @@ import Register from './Pages/Register/Register';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import Features from './Pages/Features/Features';
 import ServiceDetails from './Pages/Home/Home/ServiceDetails/ServiceDetails';
+import AddService from './Pages/AddService/AddService';
+import ManageService from './Pages/ManageService/ManageService';
 
 function App() {
   return (
@@ -19,13 +21,20 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>} ></Route>
         <Route path='/home' element={<Home></Home>} ></Route>
+        <Route path='/about' element={<About></About>}></Route>
         <Route path='/service/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
 
-        <Route path='/about' element={
+        <Route path='/addservice' element={
           <RequireAuth>
-            <About></About>
+            <AddService></AddService>
           </RequireAuth>}>
         </Route>
+
+        <Route path='/service' element={
+          <RequireAuth>
+            <ManageService></ManageService>
+          </RequireAuth>
+        }></Route>
 
         <Route path='/features' element={
           <RequireAuth>
