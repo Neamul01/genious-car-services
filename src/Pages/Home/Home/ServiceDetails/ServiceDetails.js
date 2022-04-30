@@ -1,18 +1,74 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import auth from '../../../../firebase.init'
+
 
 const ServiceDetails = () => {
     const { serviceId } = useParams();
     const [service, setService] = useState();
+    const [user, setUser] = useState('');
+    // const [user, setUser] = useState({
+    //     name: 'Akbar',
+    //     email: 'akbar@m.com',
+    //     address: 'Tajmahal',
+    //     phone: '017643345'
+    // });
+    onAuthStateChanged(auth, (user => {
+        if (user) {
+            setUser(user)
+        }
+        else (console.log('nothing'))
+    }))
     useEffect(() => {
         fetch(`http://localhost:5000/service/${serviceId}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [])
 
+    // const handleAddressChange = event => {
+    //     const { address, ...rest } = user;
+    //     const newAddress = event.target.velue;
+    //     const newUser = { address: newAddress, ...rest };
+    //     setUser(newUser)
+    // }
+
+    console.log(user.email)
+    const handlePlaceOrder = event => {
+        event.preventDefault();
+        const order = {
+            email: user.email,
+            service: service?.name,
+            serviceId: serviceId,
+            address: event.target.address.value,
+            phone: event.target.phone.value
+        }
+        axios.post('http://localhost:5000/order', order)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
-        <div>
+        <div className='mx-auto w-50'>
             <h2>This is service details for: {service?.name}</h2>
+            <form onSubmit={handlePlaceOrder}>
+                <input className='w-100 mb-2 p-2' type="text" name='name' placeholder='Your name' required />
+                <br />
+                <input className='w-100 mb-2 p-2' type="email" name='email' placeholder='Your email' value={user.email} readOnly disabled required />
+                <br />
+                <input className='w-100 mb-2 p-2' type="text" name='service' placeholder='service' value={service?.name} readOnly disabled required />
+                <br />
+                <input className='w-100 mb-2 p-2' type="text" name='address' placeholder='address' required />
+                <br />
+                <input className='w-100 mb-2 p-2' type="number" name='phone' placeholder='Your phone' required />
+                <br />
+                <input className='w-50 text-center btn btn-primary' type="submit" value="Place Order" />
+            </form>
         </div>
     );
 };
