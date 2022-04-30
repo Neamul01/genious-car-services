@@ -21,6 +21,7 @@ const ServiceDetails = () => {
         }
         else (console.log('nothing'))
     }))
+
     useEffect(() => {
         fetch(`http://localhost:5000/service/${serviceId}`)
             .then(res => res.json())
@@ -34,7 +35,6 @@ const ServiceDetails = () => {
     //     setUser(newUser)
     // }
 
-    console.log(user.email)
     const handlePlaceOrder = event => {
         event.preventDefault();
         const order = {
@@ -47,6 +47,10 @@ const ServiceDetails = () => {
         axios.post('http://localhost:5000/order', order)
             .then(response => {
                 console.log(response)
+                if (response.data.insertedId) {
+                    alert('data added')
+                }
+                event.target.reset()
             })
             .catch(error => {
                 console.log(error)
@@ -57,7 +61,7 @@ const ServiceDetails = () => {
         <div className='mx-auto w-50'>
             <h2>This is service details for: {service?.name}</h2>
             <form onSubmit={handlePlaceOrder}>
-                <input className='w-100 mb-2 p-2' type="text" name='name' placeholder='Your name' required />
+                <input className='w-100 mb-2 p-2' type="text" name='name' placeholder='Your name' value={user?.displayName} readOnly disabled required />
                 <br />
                 <input className='w-100 mb-2 p-2' type="email" name='email' placeholder='Your email' value={user.email} readOnly disabled required />
                 <br />

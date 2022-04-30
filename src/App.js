@@ -13,6 +13,7 @@ import Features from './Pages/Features/Features';
 import ServiceDetails from './Pages/Home/Home/ServiceDetails/ServiceDetails';
 import AddService from './Pages/AddService/AddService';
 import ManageService from './Pages/ManageService/ManageService';
+import Order from './Pages/Order/Order';
 
 function App() {
   return (
@@ -39,6 +40,12 @@ function App() {
         <Route path='/features' element={
           <RequireAuth>
             <Features></Features>
+          </RequireAuth>
+        }></Route>
+
+        <Route path='/order' element={
+          <RequireAuth>
+            <Order></Order>
           </RequireAuth>
         }></Route>
 

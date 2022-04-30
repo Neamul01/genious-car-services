@@ -36,6 +36,7 @@ const Header = () => {
                             authUser?.email && <>
                                 <CustomLink to='service'>Manage</CustomLink>
                                 <CustomLink to='addservice'>Add</CustomLink>
+                                <CustomLink to='order'>Orders</CustomLink>
                             </>
                         }
 
