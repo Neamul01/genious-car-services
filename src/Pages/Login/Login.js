@@ -8,6 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import auth from '../../firebase.init';
 import useFacebookSignIn from '../../hooks/useFacebookSignIn';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import axios from 'axios';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -22,12 +23,15 @@ const Login = () => {
     const { handleFacebookSignIn } = useFacebookSignIn();
 
 
-    const handleLoginForm = event => {
+    const handleLoginForm = async event => {
         event.preventDefault();
-        signInWithEmailAndPassword(auth, email, pass)
+        await signInWithEmailAndPassword(auth, email, pass)
             .then(result => {
-                navigate(from, { replace: true });
+
             })
+        const { data } = await axios.post('http://localhost:5000/login', { email })
+        localStorage.setItem('accessToken', data.accessToken)
+        navigate(from, { replace: true });
     }
 
     const handleGoogleSignInIn = () => {
