@@ -29,7 +29,7 @@ const Login = () => {
             .then(result => {
 
             })
-        const { data } = await axios.post('http://localhost:5000/login', { email })
+        const { data } = await axios.post('https://powerful-cove-68962.herokuapp.com/login', { email })
         localStorage.setItem('accessToken', data.accessToken)
         navigate(from, { replace: true });
     }

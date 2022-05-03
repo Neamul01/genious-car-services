@@ -22,11 +22,16 @@ const ServiceDetails = () => {
         else (console.log('nothing'))
     }))
 
+
+    //add a loading state or it will be failed
+
+
+
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${serviceId}`)
+        fetch(`https://powerful-cove-68962.herokuapp.com/service/${serviceId}`)
             .then(res => res.json())
             .then(data => setService(data))
-    }, [])
+    }, [user])
 
     // const handleAddressChange = event => {
     //     const { address, ...rest } = user;
@@ -44,7 +49,7 @@ const ServiceDetails = () => {
             address: event.target.address.value,
             phone: event.target.phone.value
         }
-        axios.post('http://localhost:5000/order', order)
+        axios.post('https://powerful-cove-68962.herokuapp.com/order', order)
             .then(response => {
                 console.log(response)
                 if (response.data.insertedId) {

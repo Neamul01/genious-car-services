@@ -20,7 +20,7 @@ const Order = () => {
         const getOrders = async () => {
             const email = user.email;
             // console.log(email)
-            const url = `http://localhost:5000/order?email=${email}`;
+            const url = `https://powerful-cove-68962.herokuapp.com/order?email=${email}`;
             try {
                 const { data } = await axios.get(url, {
                     headers: {
