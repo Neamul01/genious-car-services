@@ -23,7 +23,6 @@ const ServiceDetails = () => {
     }))
 
 
-    //add a loading state or it will be failed
 
 
 
@@ -31,7 +30,7 @@ const ServiceDetails = () => {
         fetch(`https://powerful-cove-68962.herokuapp.com/service/${serviceId}`)
             .then(res => res.json())
             .then(data => setService(data))
-    }, [user])
+    }, [])
 
     // const handleAddressChange = event => {
     //     const { address, ...rest } = user;
